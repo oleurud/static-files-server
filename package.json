@@ -1,0 +1,31 @@
+{
+  "name": "static-files-server",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "GOOGLE_APPLICATION_CREDENTIALS=config/gc.json DEBUG=app* nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oleurud/static-files-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oleurud/static-files-server/issues"
+  },
+  "homepage": "https://github.com/oleurud/static-files-server#readme",
+  "dependencies": {
+    "@google-cloud/storage": "^4.3.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "helmet": "^3.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
