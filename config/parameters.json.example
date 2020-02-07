@@ -1,0 +1,8 @@
+{
+    "port": 8000,
+    "GCS": {
+        "bucketName": ""
+    },
+    "inboxFolder":"/tmp/inbox",
+    "sendFolder":"/tmp/send"
+}

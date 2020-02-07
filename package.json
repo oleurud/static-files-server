@@ -6,7 +6,8 @@
   "scripts": {
     "test": "GOOGLE_APPLICATION_CREDENTIALS=config/gc.json DEBUG=app* node test/index.js",
     "dev-test": "GOOGLE_APPLICATION_CREDENTIALS=config/gc.json DEBUG=app* nodemon test/index.js",
-    "dev": "GOOGLE_APPLICATION_CREDENTIALS=config/gc.json DEBUG=app* nodemon index.js"
+    "dev": "GOOGLE_APPLICATION_CREDENTIALS=config/gc.json DEBUG=app* nodemon index.js",
+    "pro": "GOOGLE_APPLICATION_CREDENTIALS=config/gc.json node index.js"
   },
   "repository": {
     "type": "git",
