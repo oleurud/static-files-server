@@ -1,23 +1,29 @@
 'use strict'
 
-const { bucketName } = require('../../config/paramters').GCS
+const { bucketName } = require('../../config/parameters').GCS
 const { Storage } = require('@google-cloud/storage')
+const debug = require('debug')('app:services:storage')
+
 const storage = new Storage()
 
-async function upload(filename) {
-    // Uploads a local file to the bucket
-    await storage.bucket(bucketName).upload(filename, {
-        // Support for HTTP requests made with `Accept-Encoding: gzip`
-        gzip: true,
-        // By setting the option `destination`, you can change the name of the
-        // object you are uploading to a bucket.
-        metadata: {
-            // Enable long-lived HTTP caching headers
-            // Use only if the contents of the file will never change
-            // (If the contents will change, use cacheControl: 'no-cache')
-            cacheControl: 'public, max-age=31536000',
-        },
-    });
+module.exports = {
+    async upload(filename, destination) {
+        // Uploads a local file to the bucket
+        const r = await storage.bucket(bucketName).upload(filename, {
+            // Support for HTTP requests made with `Accept-Encoding: gzip`
+            gzip: true,
+            // By setting the option `destination`, you can change the name of the
+            // object you are uploading to a bucket.
+            destination,
+            metadata: {
+                // Enable long-lived HTTP caching headers
+                // Use only if the contents of the file will never change
+                // (If the contents will change, use cacheControl: 'no-cache')
+                cacheControl: 'public, max-age=31536000',
+            },
+        })
 
-    console.log(`${filename} uploaded to ${bucketName}.`);
+        debug(r)
+        debug(`${filename} uploaded to ${bucketName}.`);
+    }
 }

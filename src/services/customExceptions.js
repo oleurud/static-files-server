@@ -12,6 +12,12 @@ const errors = [
         code: 404,
         message: 'Route not found',
         statusCode: 404
+    },
+    {
+        name: 'FieldValidationError',
+        code: 400,
+        message: 'Field not found',
+        statusCode: 400
     }
 ]
 
