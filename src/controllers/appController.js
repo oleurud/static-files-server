@@ -6,9 +6,14 @@ const debug = require('debug')('app:controller:app')
 module.exports = {
 
     async getFile (req, res, next) {
-        debug(req.params)
-        res.locals.response = 'hi'
-        next()
+        try {
+            appManager
+                .getFileStream(res.locals.user, req.params.app, req.params['0'])
+                .on('error', next)
+                .pipe(res)
+        } catch (error) {
+            next(error)
+        }
     },
 
     async addFile (req, res, next) {
@@ -18,6 +23,5 @@ module.exports = {
         } catch (error) {
             next(error)
         }
-
     }
 }

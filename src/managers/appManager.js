@@ -6,14 +6,9 @@ const exception = require('../services/customExceptions')
 const debug = require('debug')('app:managers:app')
 
 module.exports = {
-    async create (user, { name }) {
-        const app = name || uuidv4()
-        const appFolder = `${user}/${app}/`
-        debug(app, appFolder)
-        // create folder in Google Storage
-        storage.upload(appFolder)
-
-        return app
+    getFileStream (user, app, path) {
+        const bucketPath = `${user}/${app}/${path}`
+        return storage.downloadStream(bucketPath)
     },
 
     async addFile (user, app, file, { path }) {
@@ -23,11 +18,12 @@ module.exports = {
 
         const bucketPath = `${user}/${app}/${path}`
 
-        storage.upload(file.path, bucketPath)
-        .catch(error => {
-            debug(error)
-            throw error
-        })
+        await storage
+            .upload(file.path, bucketPath)
+            .catch(error => {
+                debug(error)
+                throw error
+            })
 
         return path
     }

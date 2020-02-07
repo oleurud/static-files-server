@@ -5,7 +5,7 @@ const app = require('../../index')
 const request = require('supertest').agent(app)
 
 describe('FUNCTIONAL API - INDEX', function () {
-    it('should response ok (status)', function (done) {
+    it('status endpoint works', function (done) {
         request
             .get('/')
             .expect(200)

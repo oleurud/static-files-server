@@ -17,7 +17,7 @@ debug('Running tests')
 
 // Test suites
 mocha.addFile(path.resolve('test/functional/index.js'))
-// mocha.addFile(path.resolve('test/functional/app.js'))
+mocha.addFile(path.resolve('test/functional/app.js'))
 
 // run tests
 mocha.run()

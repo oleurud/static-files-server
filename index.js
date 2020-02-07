@@ -1,5 +1,5 @@
 const parameters = require('./config/parameters')
-const debug = require('debug')
+const debug = require('debug')('app:index')
 
 const express = require('express')
 const app = express()

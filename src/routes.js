@@ -8,15 +8,14 @@ const mainController = require('./controllers/mainController')
 const appController = require('./controllers/appController')
 
 module.exports = function (app) {
-    // Test
+    // Status
     app.get('/', mainController.index)
 
     // app
     let appRouter = express.Router({ mergeParams: true })
-    appRouter.use(userMiddleware)
+    appRouter.use(userMiddleware())
     app.use('/app', appRouter)
 
-    appRouter.post(':app/file', multer.single('app'), appController.addFile)
-
-    appRouter.get(':app/*', appController.getFile)
+    appRouter.post('/:app/file', multer.single('file'), appController.addFile)
+    appRouter.get('/:app/*', appController.getFile)
 }
