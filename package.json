@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "DEBUG=app* node test/index.js",
+    "dev-test": "DEBUG=app* nodemon test/index.js",
     "dev": "GOOGLE_APPLICATION_CREDENTIALS=config/gc.json DEBUG=app* nodemon index.js"
   },
   "repository": {
@@ -27,6 +28,9 @@
     "multer": "^1.4.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "mocha": "^7.0.1",
+    "nodemon": "^2.0.2",
+    "sinon": "^8.1.1",
+    "supertest": "^4.0.2"
   }
 }

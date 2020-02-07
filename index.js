@@ -25,3 +25,5 @@ process.on('SIGINT', function () {
 process.on('uncaughtException', function (err) {
     debug('uncaughtException', err)
 })
+
+module.exports = app
