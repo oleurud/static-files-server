@@ -1,6 +1,7 @@
 'use strict'
 
 const uuidv4 = require('uuid/v4')
+const { host, port } = require('../../config/parameters')
 const storage = require('../services/storage')
 const exception = require('../services/customExceptions')
 const debug = require('debug')('app:managers:app')
@@ -25,6 +26,6 @@ module.exports = {
                 throw error
             })
 
-        return path
+        return `${host}:${port}/app/${app}/${path}`
     }
 }
