@@ -7,8 +7,13 @@ module.exports = {
 
     async getFile (req, res, next) {
         try {
+            const path = req.params['0']
+            const extension = path.split('.').pop()
+            if (extension === 'html')
+                res.set('Content-Type', 'text/html')
+
             appManager
-                .getFileStream(res.locals.user, req.params.app, req.params['0'])
+                .getFileStream(res.locals.user, req.params.app, path)
                 .on('error', next)
                 .pipe(res)
         } catch (error) {
