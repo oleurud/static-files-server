@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static files client</title>
+</head>
+
+<body>
+
+    <img src="images/source.gif">
+
+    <h1>the Magic static apps uploader</h1>
+    <form id="form" action="#" method="post" enctype="multipart/form-data">
+        <p>
+            Select Folder to Upload:
+            <input type="file" name="files[]" id="files" multiple directory="" webkitdirectory="" moxdirectory="" />
+        </p>
+        <p>
+            Select an app name:
+            <input type="text" name="name" id="name" /></p>
+        </p>
+        <p>
+            <input type="submit" value="upload" name="upload" />
+        </p>
+    </form>
+
+    <h2>Results:</h2>
+    <ul id="responses"></ul>
+
+    <script>
+        function sendFile(file, app) {
+            const formData = new FormData()
+            formData.append('file', file)
+            formData.append('path', file.webkitRelativePath)
+
+            const xhr = new XMLHttpRequest()
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    showResponse(xhr.responseText)
+                }
+            }
+            xhr.open("POST", `http://localhost:8000/app/${app}/file`, true)
+            xhr.send(formData)
+        }
+
+        function showResponse(response) {
+            const li = document.createElement("li")
+            li.innerHTML = response
+
+            ul = document.getElementById('responses')
+            ul.appendChild(li)
+        }
+
+        document.getElementById('form').addEventListener('submit', function (e) {
+            e.preventDefault()
+
+            const app = document.getElementById('name').value
+            const files = document.getElementById('files').files
+
+            for(let file of files){
+                sendFile(file, app)
+            }
+        })
+    </script>
+
+</body>
+
+</html>
